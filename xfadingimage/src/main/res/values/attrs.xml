@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- start CircleImage attrs -->
+    <declare-styleable name="CircleImage">
+        <attr name="border" format="boolean" />
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+        <attr name="shadow" format="boolean" />
+        <attr name="border_overlay" format="boolean" />
+    </declare-styleable>
+    <!-- end CircleImage attrs -->
+
+    <!-- start CornerImageView attrs -->
+    <declare-styleable name="CornerImageView">
+        <attr name="image_corner_radius" format="integer" />
+    </declare-styleable>
+    <!-- end CornerImageView attrs -->
+</resources>
