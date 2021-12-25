@@ -2,13 +2,16 @@ package com.aghiadodeh.xfadingimage
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.TypedValue
 import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 
 @SuppressLint("AppCompatCustomView")
 class CornerImageView : FadingImage {
-    private var radius = 17.0f
+    private var radius = 6.0f
     private var path: Path? = null
     private var rect: RectF? = null
     private val mDrawableRect = RectF()
@@ -33,7 +36,7 @@ class CornerImageView : FadingImage {
     companion object {
         private val SCALE_TYPE = ScaleType.CENTER_CROP
         private val BITMAP_CONFIG = Bitmap.Config.ARGB_8888
-        private const val COLORDRAWABLE_DIMENSION = 2
+        private const val COLOR_DRAWABLE_DIMENSION = 2
         private const val DEFAULT_BORDER_WIDTH = 0
         private const val DEFAULT_BORDER_COLOR = Color.BLACK
         private const val DEFAULT_BORDER_OVERLAY = false
@@ -47,18 +50,16 @@ class CornerImageView : FadingImage {
         init(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(
-        context,
-        attrs,
-        defStyle
-    ) {
+    constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle) {
         init(attrs)
     }
 
     private fun init(attrs: AttributeSet? = null) {
 
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.CornerImageView, 0, 0)
-        radius = attributes.getInt(R.styleable.CornerImageView_image_corner_radius, 17).toFloat()
+        attributes.getDimensionPixelSize(R.styleable.CornerImageView_image_corner_radius, 6).let {
+            radius = it.toDP(context.resources)
+        }
         attributes.recycle()
 
         path = Path()
@@ -73,7 +74,8 @@ class CornerImageView : FadingImage {
     }
 
     fun setRadius(radius: Float) {
-        this.radius = radius
+        this.radius = radius.toDP(context.resources)
+        invalidate()
     }
 
     var borderColor: Int
@@ -88,7 +90,7 @@ class CornerImageView : FadingImage {
         }
 
     fun setBorderColorResource(@ColorRes borderColorRes: Int) {
-        borderColor = context.resources.getColor(borderColorRes)
+        borderColor = ContextCompat.getColor(context, borderColorRes)
     }
 
     var borderWidth: Int
@@ -156,7 +158,15 @@ class CornerImageView : FadingImage {
         require(scaleType == SCALE_TYPE) { String.format("ScaleType %s not supported.", scaleType) }
     }
 
-    override fun getScaleType(): ScaleType? {
+    override fun getScaleType(): ScaleType {
         return SCALE_TYPE
     }
+}
+
+fun Int.toDP(resources: Resources): Float {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), resources.displayMetrics)
+}
+
+fun Float.toDP(resources: Resources): Float {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, resources.displayMetrics)
 }

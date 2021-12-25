@@ -12,7 +12,7 @@
 
     <!-- start CornerImageView attrs -->
     <declare-styleable name="CornerImageView">
-        <attr name="image_corner_radius" format="integer" />
+        <attr name="image_corner_radius" format="dimension" />
     </declare-styleable>
     <!-- end CornerImageView attrs -->
 </resources>

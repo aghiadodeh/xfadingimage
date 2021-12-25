@@ -52,8 +52,11 @@ open class FadingImage : ImageView {
     }
 
     fun defaultColorFilter() {
-        clearColorFilter()
-        // drawable.clearColorFilter()
+        try {
+            setColorFilter(Color.rgb(255, 255, 255), PorterDuff.Mode.MULTIPLY)
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+        }
     }
 
     private fun drawableListener(iFadeImage: IFadeImage?, duration: Long): RequestListener<Drawable> {
