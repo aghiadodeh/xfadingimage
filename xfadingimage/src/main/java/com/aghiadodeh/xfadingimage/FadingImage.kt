@@ -71,7 +71,7 @@ open class FadingImage : ImageView {
 
             override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                 imageView.scaleType = ScaleType.CENTER_CROP
-                if (drawable == null) {
+                if (drawable == null && duration != 0L) {
                     imageView.animate().alpha(0F).setDuration(100).withEndAction {
                         imageView.setImageDrawable(resource)
                         imageView.animate().alpha(1F).duration = duration
@@ -97,7 +97,7 @@ open class FadingImage : ImageView {
             override fun onResourceReady(resource: Bitmap?, model: Any?, target: Target<Bitmap>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                 imageView.scaleType = ScaleType.CENTER_CROP
                 try {
-                    if (drawable == null) {
+                    if (drawable == null && duration != 0L) {
                         imageView.animate().alpha(0F).setDuration(100).withEndAction {
                             imageView.setImageBitmap(resource)
                             imageView.animate().alpha(1F).duration = duration
