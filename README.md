@@ -14,7 +14,7 @@ and in your app.gradle:
 ``` groovy
 dependencies {
 	...
-	implementation 'com.github.aghiadodeh:xfadingimage:1.0.1'
+	implementation 'com.github.aghiadodeh:xfadingimage:1.0.2'
 }
 ```
 
