@@ -47,8 +47,8 @@ open class FadingImage : ImageView {
         }
     }
 
-    fun darkenImage() {
-        setColorFilter(Color.rgb(123, 123, 123), PorterDuff.Mode.MULTIPLY)
+    fun darkenImage(rgb: Int = 123) {
+        setColorFilter(Color.rgb(rgb, rgb, rgb), PorterDuff.Mode.MULTIPLY)
     }
 
     fun defaultColorFilter() {

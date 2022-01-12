@@ -14,7 +14,7 @@ and in your app.gradle:
 ``` groovy
 dependencies {
 	...
-	implementation 'com.github.aghiadodeh:xfadingimage:1.0.2'
+	implementation 'com.github.aghiadodeh:xfadingimage:1.0.3'
 }
 ```
 
@@ -83,7 +83,7 @@ cornerImage.loadImage(url = imageUrl, duration = 500L, iFadeImage = { loaded ->
 
 # set dark filter to image:
 ```kitlon
-circleImage.darkenImage()
+circleImage.darkenImage(rgb: Int = 123)
 ```
 
 # clear dark filter to image:
